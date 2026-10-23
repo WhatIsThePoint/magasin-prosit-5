@@ -34,7 +34,7 @@ public abstract class Employe {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Employe)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Employe employe = (Employe) o;
