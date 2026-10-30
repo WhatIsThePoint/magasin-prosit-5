@@ -39,13 +39,14 @@ public class Main {
         Produit p5 = new Produit(5, "Eau", "Safia", 0.7f);
         Produit p6 = new Produit(6, "Biscuits", "Bimo", 3.4f);
 
-        m1.ajouterProduit(p1);
-        m1.ajouterProduit(p2);
-        m1.ajouterProduit(p3);
+        ajouterProduit(m1, p1);
+        ajouterProduit(m1, p2);
+        ajouterProduit(m1, p3);
 
-        m2.ajouterProduit(p4);
-        m2.ajouterProduit(p5);
-        m2.ajouterProduit(p6);
+        ajouterProduit(m2, p4);
+        ajouterProduit(m2, p5);
+        ajouterProduit(m2, p6);
+        ajouterProduit(m2, new Produit(7, "Produit invalide", "Test", -1.0f));
 
         System.out.println();
         m1.afficher();
@@ -60,5 +61,13 @@ public class Main {
         m2.afficherSalaires();
         m2.afficherPrimesResponsables();
         m2.afficherNombreEmployesParType();
+    }
+
+    private static void ajouterProduit(Magasin magasin, Produit produit) {
+        try {
+            magasin.ajouterProduit(produit);
+        } catch (MagasinPleinException | PrixNegatifException e) {
+            System.out.println("Ajout refuse : " + e.getMessage());
+        }
     }
 }

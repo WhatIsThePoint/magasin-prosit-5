@@ -19,6 +19,14 @@ public class Produit {
         this.prix = prix;
     }
 
+    public float getPrix() {
+        return prix;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
     public void afficher() {
         System.out.println("id : " + id+" libelle : " + libelle+" marque : " + marque+" prix : " + prix+" date d'expiration : " + dateExpiration);
         System.out.println("------------------------------------------------------------------------------------------------------------------");

@@ -1,5 +1,5 @@
 public class Magasin {
-    private static final int MAX_PRODUITS = 50;
+    private static final int MAX_PRODUITS = 2;
     private static final int MAX_EMPLOYES = 20;
 
     private int identifiant;
@@ -20,7 +20,7 @@ public class Magasin {
         this.nom = nom;
         this.adresse = adresse;
         this.capacite = Math.min(capacite, MAX_PRODUITS);
-        this.produits = new Produit[MAX_PRODUITS];
+        this.produits = new Produit[this.capacite];
         this.employes = new Employe[MAX_EMPLOYES];
         this.nb_produits = 0;
         this.nb_employes = 0;
@@ -57,10 +57,12 @@ public class Magasin {
                 + ", nombreProduits=" + nb_produits + ", nombreEmployes=" + nb_employes + "}";
     }
 
-    public void ajouterProduit(Produit produit) {
+    public void ajouterProduit(Produit produit) throws MagasinPleinException, PrixNegatifException {
+        if (produit.getPrix() < 0) {
+            throw new PrixNegatifException("Le prix du produit " + produit.getLibelle() + " est négatif.");
+        }
         if (nb_produits >= capacite) {
-            System.out.println("Magasin " + nom + " plein : impossible d'ajouter " + produit.libelle + ".");
-            return;
+            throw new MagasinPleinException("Le magasin " + nom + " est plein.");
         }
         produits[nb_produits++] = produit;
     }
